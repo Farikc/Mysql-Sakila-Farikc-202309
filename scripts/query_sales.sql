@@ -38,7 +38,24 @@ select
     sum(case when payment_year=2005 and payment_month=7 then amount else 0 end) jul2005
 from ventas_por_tienda_por_ano_mes
 group by store_id
-)
-select * 
+),
+-- 4. Calculas diferencias
+ventas_por_tienda_comparativo as (
+select 
+    store_id,
+    may2005,
+    jun2005,
+    (jun2005 - may2005) as diffjun2005,
+    jul2005,
+    (jul2005 - jun2005) as diffjul2005
 from ventas_por_tienda_por_mes
+)
+
+select * 
+from ventas_por_tienda_comparativo
 limit 5;
+
+/*
+por cliente cuanto me han comprado mes a mes
+
+*/
